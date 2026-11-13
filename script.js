@@ -1,0 +1,20 @@
+// Personalize these values before publishing.
+const CONFIG = {
+  name: "Sushie Pie", // Her name or nickname
+  age: 31,
+  birthdayMessage: "May your day be as beautiful, warm and wonderful as you make my world.",
+  loveLetter: "I feel lucky to do life with you. Thank you for your smile, your kindness, your laughter, and for being you. I hope this year brings you every bit of happiness you deserve.",
+  musicFile: "" // Optional: "assets/birthday-music.mp3"
+};
+const screens = ["cake-screen","birthday-screen","letter-screen","memories-screen"].map(id=>document.getElementById(id));
+const flame=document.getElementById("flame");let blown=false,stream,audioCtx,raf,music;
+function ordinal(n){const x=n%100;if(x>=11&&x<=13)return "th";return ({1:"st",2:"nd",3:"rd"}[n%10]||"th")}
+document.getElementById("name").textContent=CONFIG.name+" ❤️";document.getElementById("age").textContent=CONFIG.age+ordinal(CONFIG.age);document.getElementById("birthday-message").textContent=CONFIG.birthdayMessage;document.getElementById("love-letter").textContent=CONFIG.loveLetter;
+function goTo(next){const current=screens.find(s=>!s.hidden);current.hidden=true;next.hidden=false;window.scrollTo({top:0,behavior:"smooth"})}
+function blowOut(){if(blown)return;blown=true;stopMic();flame.classList.add("out");document.getElementById("hint").textContent="Your wish is on its way… ❤️";document.getElementById("blow").disabled=true;setTimeout(()=>{goTo(screens[1]);confetti();startMusic()},900)}
+document.getElementById("blow").addEventListener("click",blowOut);flame.addEventListener("click",blowOut);document.getElementById("to-letter").onclick=()=>goTo(screens[2]);document.getElementById("to-memories").onclick=()=>goTo(screens[3]);
+document.getElementById("replay").onclick=()=>{stopMic();if(music){music.pause();music.currentTime=0}blown=false;flame.classList.remove("out");document.getElementById("hint").textContent="Take a deep breath and blow out the candle ✨";document.getElementById("blow").disabled=false;document.getElementById("status").textContent="Or simply tap the candle flame.";goTo(screens[0])};
+function confetti(){const box=document.getElementById("confetti");box.replaceChildren();const colors=["#f4b8c9","#f4d69a","#fff1e8","#d9a8d8","#e98da9"];for(let i=0;i<85;i++){const b=document.createElement("i");b.style.left=Math.random()*100+"%";b.style.background=colors[i%colors.length];b.style.setProperty("--duration",3+Math.random()*3+"s");b.style.setProperty("--delay",Math.random()+"s");b.style.setProperty("--drift",-90+Math.random()*180+"px");box.appendChild(b)}}
+async function startMic(){const status=document.getElementById("status");if(!navigator.mediaDevices?.getUserMedia){status.textContent="Microphone unavailable. Tap the flame instead.";return}try{document.getElementById("mic").disabled=true;status.textContent="Listening… blow gently towards the microphone.";stream=await navigator.mediaDevices.getUserMedia({audio:true});audioCtx=new(window.AudioContext||window.webkitAudioContext)();const source=audioCtx.createMediaStreamSource(stream),analyser=audioCtx.createAnalyser();analyser.fftSize=1024;source.connect(analyser);const data=new Uint8Array(analyser.fftSize);let loud=0;const listen=()=>{if(blown)return;analyser.getByteTimeDomainData(data);let sum=0;for(const v of data){const x=(v-128)/128;sum+=x*x}loud=Math.sqrt(sum/data.length)>.085?loud+1:Math.max(0,loud-1);if(loud>=7){blowOut();return}raf=requestAnimationFrame(listen)};listen()}catch(e){status.textContent="Microphone permission unavailable. Tap the flame instead.";stopMic()}}
+function stopMic(){if(raf)cancelAnimationFrame(raf);if(stream)stream.getTracks().forEach(t=>t.stop());if(audioCtx&&audioCtx.state!=="closed")audioCtx.close();stream=null;audioCtx=null;document.getElementById("mic").disabled=false}document.getElementById("mic").addEventListener("click",startMic);
+function startMusic(){if(!CONFIG.musicFile)return;music=new Audio(CONFIG.musicFile);music.loop=true;music.volume=.35;music.play().catch(()=>{})}
