@@ -1,13 +1,161 @@
+
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#241326"><title>A little surprise ❤️</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="app">
-<section class="scene" id="cake-screen"><p class="eyebrow">A LITTLE SURPRISE FOR YOU</p><h1>Close your eyes,<br><em>make a wish.</em></h1><p class="sub">Someone has made something special just for you.</p>
-<div class="cake-stage"><span class="sparkle">✦</span><div class="candle-wrap"><button class="flame" id="flame" aria-label="Tap candle flame"><span></span></button><div class="candle"></div></div><div class="cake"><div class="icing"></div><span class="decoration">♥　✦　♥</span></div><div class="plate"></div></div>
-<p class="hint" id="hint">Take a deep breath and blow out the candle ✨</p><button class="primary" id="blow">Blow the candle ♡</button><button class="secondary" id="mic">Use microphone</button><p class="status" id="status">Or simply tap the candle flame.</p></section>
-<section class="scene" id="birthday-screen" hidden><div class="confetti" id="confetti"></div><p class="eyebrow">TODAY IS ALL ABOUT YOU</p><p class="hearts">♥　✦　♥</p><p class="sub">To my favourite person,</p><h2>Happy <em id="age">31st</em><br>Birthday!</h2><p class="name" id="name">My love ❤️</p><p class="message" id="birthday-message"></p><button class="primary" id="to-letter">A little something for you →</button></section>
-<section class="scene" id="letter-screen" hidden><p class="eyebrow">JUST BETWEEN US</p><article class="letter"><div class="flower">✿</div><p class="letter-to">To my love,</p><h2>You make ordinary days feel extraordinary.</h2><p id="love-letter"></p><p class="signoff">Forever yours, <span>♥</span></p></article><button class="primary" id="to-memories">A few of our memories →</button></section>
-<section class="scene" id="memories-screen" hidden><p class="eyebrow">LITTLE MOMENTS, BIG LOVE</p><h2>Our favourite memories</h2><p class="sub">A few moments I wish I could relive a thousand times.</p><div class="photos">
-<figure><img src="assets/memory-1.JPG" alt="Memory one" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="placeholder" hidden>📷</div><figcaption>One of my favourite days</figcaption></figure>
-<figure><img src="assets/memory-2.JPG" alt="Memory two" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="placeholder" hidden>📷</div><figcaption>My happy place is with you</figcaption></figure>
-<figure><img src="assets/memory-3.JPG" alt="Memory three" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="placeholder" hidden>📷</div><figcaption>A million more to come</figcaption></figure></div><p class="final">I love you. Today, tomorrow, always. ♥</p><button class="secondary" id="replay">Watch the surprise again ↺</button></section>
-</main><script src="script.js"></script></body></html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#241326">
+    <title>A little surprise ❤️</title>
+    <link rel="stylesheet" href="style.css?v=3">
+</head>
+
+<body>
+<main class="app">
+
+    <!-- SCREEN 1: CAKE -->
+    <section class="scene" id="cake-screen">
+
+        <p class="eyebrow">A LITTLE SURPRISE FOR YOU</p>
+
+        <h1>
+            Close your eyes,<br>
+            <em>make a wish.</em>
+        </h1>
+
+        <p class="sub">
+            Someone has made something special just for you.
+        </p>
+
+        <div class="cake-stage">
+            <span class="sparkle">✦</span>
+
+            <div class="candle-wrap">
+                <button class="flame" id="flame" aria-label="Tap candle flame">
+                    <span></span>
+                </button>
+                <div class="candle"></div>
+            </div>
+
+            <div class="cake">
+                <div class="icing"></div>
+                <span class="decoration">♥　✦　♥</span>
+            </div>
+
+            <div class="plate"></div>
+        </div>
+
+        <p class="hint" id="hint">
+            Take a deep breath and blow out the candle ✨
+        </p>
+
+        <button class="primary" id="blow">
+            Blow the candle ♡
+        </button>
+
+        <button class="secondary" id="mic">
+            Use microphone
+        </button>
+
+        <p class="status" id="status">
+            Or simply tap the candle flame.
+        </p>
+
+    </section>
+
+
+    <!-- SCREEN 2: BIRTHDAY WISH -->
+    <section class="scene" id="birthday-screen" hidden>
+
+        <div class="confetti" id="confetti"></div>
+
+        <p class="eyebrow">TODAY IS ALL ABOUT YOU</p>
+        <p class="hearts">♥　✦　♥</p>
+        <p class="sub">To my favourite person,</p>
+
+        <h2>
+            Happy <em id="age">31st</em><br>
+            Birthday!
+        </h2>
+
+        <p class="name" id="name">My love ❤️</p>
+        <p class="message" id="birthday-message"></p>
+
+        <button class="primary" id="to-letter">
+            A little something for you →
+        </button>
+
+    </section>
+
+
+    <!-- SCREEN 3: LOVE LETTER -->
+    <section class="scene" id="letter-screen" hidden>
+
+        <p class="eyebrow">JUST BETWEEN US</p>
+
+        <article class="letter">
+            <div class="flower">✿</div>
+
+            <p class="letter-to">To my love,</p>
+
+            <h2>You make ordinary days feel extraordinary.</h2>
+
+            <p id="love-letter"></p>
+
+            <p class="signoff">
+                Forever yours, <span>♥</span>
+            </p>
+        </article>
+
+        <button class="primary" id="to-memories">
+            A few of our memories →
+        </button>
+
+    </section>
+
+
+    <!-- SCREEN 4: PHOTO GALLERY -->
+    <section class="scene" id="memories-screen" hidden>
+
+        <p class="eyebrow">LITTLE MOMENTS, BIG LOVE</p>
+
+        <h2>Our favourite memories</h2>
+
+        <p class="sub">
+            A few moments I wish I could relive a thousand times.
+        </p>
+
+        <div class="photos">
+
+            <figure>
+                <img src="assets/memory-1.JPG" alt="Memory one">
+                <figcaption>One of my favourite days</figcaption>
+            </figure>
+
+            <figure>
+                <img src="assets/memory-2.JPG" alt="Memory two">
+                <figcaption>My happy place is with you</figcaption>
+            </figure>
+
+            <figure>
+                <img src="assets/memory-3.JPG" alt="Memory three">
+                <figcaption>A million more to come</figcaption>
+            </figure>
+
+        </div>
+
+        <p class="final">
+            I love you. Today, tomorrow, always. ♥
+        </p>
+
+        <button class="secondary" id="replay">
+            Watch the surprise again ↺
+        </button>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
